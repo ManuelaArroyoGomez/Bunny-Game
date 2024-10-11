@@ -86,7 +86,6 @@ body {
     .layer-1 {
         @include layerconf(1, 450px, 80px);
         @include animationBunny(layer, 1s);
-        bottom: 0;
         right: 60px;
         input[type=checkbox] {
             @include animationBunny(bunny, 1s)
@@ -94,7 +93,7 @@ body {
     }
     .layer-2 {
         @include layerconf(2, 450px, 80px);
-        @include animationBunny(layer, 1.5);
+        @include animationBunny(layer, 1.5s);
         left: 60px;
         input[type=checkbox] {
             @include animationBunny(bunny, 1.5s)
