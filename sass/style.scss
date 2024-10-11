@@ -1,0 +1,269 @@
+$sky: #ccefff;
+$bunny: white;
+$wall: #ba6d4f;
+$grass: #51af5e;
+$land: #a6543d;
+$eyes: gray; 
+$ears: pink;
+$shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+@mixin layerconf($num, $height, $width){
+    position: absolute;
+    z-index: $num;
+    height: $height;
+    width: $width;
+    bottom: 0;
+}
+@mixin bunnyconf($radius,$width,$height) {
+    position: absolute;
+    border-radius: $radius;
+    width: $width;
+    height: $height;
+}
+@mixin shadow {
+    box-shadow: $shadow;
+    overflow: hidden;
+}
+@mixin animationBunny {
+    animation-name: layer;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+@keyframes blink {
+    0% {
+        height: 4px;
+    }  
+    5% {
+        transform: translate(0px, 2px);
+        height: 1px;
+    }   
+    10% {
+        transform: translate(0px, 0px);
+        height: 4px;
+    }
+}
+@keyframes layer {
+    0% {
+        bottom: 0;
+    }
+    25% {
+        bottom: -80px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.phone {
+    position: relative;
+    border: 8px solid black;
+    border-radius: 40px;
+    width: 300px;
+    height: 600px;
+    background: #ccefff;
+    box-shadow: $shadow;
+    .layer-1 {
+        @include layerconf(1, 450px, 80px);
+        @include animationBunny;
+        bottom: 0;
+        right: 60px;
+    }
+    .layer-2 {
+        @include layerconf(2, 450px, 80px);
+        @include animationBunny;
+        bottom: 0;
+        left: 60px;
+    }
+    .layer-3 {
+        @include layerconf(3, 400px, 220px);
+        @include shadow();
+        background: $wall;
+        border-radius: 20px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 0;
+    }
+    .layer-4 {
+        @include layerconf(4, 350px, 80px);
+        @include animationBunny;
+        left: 20px;
+    }
+    .layer-5 {
+        @include layerconf(5, 300px, 220px);
+        @include shadow();
+        background: $wall;
+        border-radius: 20px;
+    }
+    .layer-6 {
+        @include layerconf(6, 250px, 80px);
+        @include animationBunny;
+        right: 40px;
+    }
+    .layer-7 {
+        @include layerconf(7, 200px, 160px);
+        @include shadow();
+        background: $wall;
+        border-radius: 20px;
+        right: 0;
+        
+    }
+    .layer-3::after,
+    .layer-5::after,
+    .layer-7::after {
+        position: absolute;
+        content: "";
+        left: -0px;
+        top: 0px;
+        width: 100%;
+        height: 40px;
+        background: linear-gradient(135deg, $grass 25%, transparent 25%) -50px 0,
+        linear-gradient(-135deg, $grass 25%, transparent 25%) -50px 0,
+        linear-gradient(45deg, $grass 25%, transparent 25%),
+        linear-gradient(-45deg, $grass 25%, transparent 25%);
+        background-size: 40px 100px;
+        background-position: 140px 0 0 30px 0;
+    }
+    .layer-3::before,
+    .layer-5::before,
+    .layer-7::before {
+        position: absolute;
+        content: "";
+        left: -0px;
+        top: 15px;
+        width: 100%;
+        height: 40px;
+        background: linear-gradient(135deg, $land 25%, transparent 25%) -50px 0,
+        linear-gradient(-135deg, $land 25%, transparent 25%) -50px 0,
+        linear-gradient(45deg, $land 25%, transparent 25%),
+        linear-gradient(-45deg, $land 25%, transparent 25%);
+        background-size: 40px 100px;
+        background-position: 140px 0 0 30px 0;
+    }
+    .layer-8 {
+        @include layerconf(8, 120px, 200px);
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        .layer-8__left-lawn {
+            @include bunnyconf(40px 40px 0 0, 80px, 70%);
+            background: $grass;
+            bottom: 0;
+            display: inline-block;
+            left: 0;
+        }
+        .layer-8__center-lawn {
+            @include bunnyconf(40px 40px 0 0, 80px, 100%);
+            background: $grass;
+            bottom: 0;
+            display: inline-block;
+            left: 60px;
+        }
+        .layer-8__right-lawn {
+            @include bunnyconf(40px 40px 0 0, 80px, 80%);
+            background: $grass;
+            bottom: 0;
+            display: inline-block;
+            left: 130px;
+        }
+    }
+    .layer-9 {
+        @include layerconf(9, 100px, 120px);
+        .layer-9__left-cloud {
+            @include bunnyconf(40px 40px 0 0, 80px, 100%);
+            background: $bunny;
+            display: inline-block;
+            left: 0;
+        }
+        .layer-9__right-cloud {
+            @include bunnyconf(0 40px 30px 0, 40px, 60%);
+            background: $bunny;
+            bottom: 0;
+            display: inline-block;
+            left: 80px;
+        }
+    }
+    .layer-10 {
+        @include layerconf(10, 100px, 120px);
+        right: 0px; 
+        .layer-10__left-cloud {
+            @include bunnyconf(40px 0 0 30px, 40px, 60%);
+            background: $bunny;
+            bottom: 0;
+            display: inline-block;
+            right: 80px;
+        }
+        .layer-10__right-cloud {
+            @include bunnyconf(40px 40px 0 0, 80px, 100%);
+            background: $bunny;
+            bottom: 0;
+            display: inline-block;
+            right: 0px;
+        }
+    }
+}
+div {
+    input[type=checkbox] {
+        appearance: none;
+        cursor: pointer;
+        height: 50px;
+        margin: 0;
+        position: relative;
+        top: 0;
+        width: 80px;
+        z-index: 2;
+    }
+    .left-ear--outer {
+        @include bunnyconf(90%, 20px, 50px);
+        background: $bunny;
+        top: 1px;
+        left: 10px;
+    }
+    .left-ear--inner {
+        @include bunnyconf(90%, 10px, 50px);
+        background: $ears;
+        left: 15px;
+        top: 8px;
+    }
+    .right-ear--outer {
+        @include bunnyconf(90%, 20px, 50px);
+        background: $bunny;
+        top: 1px;
+        right: 10px;
+    }
+    .right-ear--inner {
+        @include bunnyconf(90%, 10px, 50px);
+        background: $ears;
+        right: 15px;
+        top: 8px;
+    }
+    .head {
+        @include bunnyconf(50%, 100%, 80px);
+        background: $bunny;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 30px;
+        .head__eye {
+            @include bunnyconf(50%, 4px, 4px);
+            background: $eyes;
+            top: 15px;
+            animation-name: blink;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+        .head__eye--left {
+            left: 30px;
+        }
+        .head__eye--right {
+            right: 30px;
+        }
+    }
+}
