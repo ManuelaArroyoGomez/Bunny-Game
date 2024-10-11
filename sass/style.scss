@@ -95,7 +95,6 @@ body {
     .layer-2 {
         @include layerconf(2, 450px, 80px);
         @include animationBunny(layer, 1.5);
-        bottom: 0;
         left: 60px;
         input[type=checkbox] {
             @include animationBunny(bunny, 1.5s)

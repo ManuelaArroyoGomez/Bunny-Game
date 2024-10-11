@@ -22,12 +22,25 @@
     bottom: 0;
   }
 }
+@keyframes bunny {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: 80px;
+  }
+  100% {
+    top: 0;
+  }
+}
 body {
+  font-family: "Chakra Petch", sans-serif;
   margin: 0;
   height: 100vh;
   width: 100%;
   display: grid;
   place-items: center;
+  counter-reset: score;
 }
 
 .phone {
@@ -38,6 +51,7 @@ body {
   height: 600px;
   background: #ccefff;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
 }
 .phone .layer-1 {
   position: absolute;
@@ -52,6 +66,12 @@ body {
   bottom: 0;
   right: 60px;
 }
+.phone .layer-1 input[type=checkbox] {
+  animation-name: bunny;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
 .phone .layer-2 {
   position: absolute;
   z-index: 2;
@@ -59,11 +79,16 @@ body {
   width: 80px;
   bottom: 0;
   animation-name: layer;
-  animation-duration: 1s;
+  animation-duration: 1.5;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  bottom: 0;
   left: 60px;
+}
+.phone .layer-2 input[type=checkbox] {
+  animation-name: bunny;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 .phone .layer-3 {
   position: absolute;
@@ -87,10 +112,16 @@ body {
   width: 80px;
   bottom: 0;
   animation-name: layer;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   left: 20px;
+}
+.phone .layer-4 input[type=checkbox] {
+  animation-name: bunny;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 .phone .layer-5 {
   position: absolute;
@@ -110,10 +141,16 @@ body {
   width: 80px;
   bottom: 0;
   animation-name: layer;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   right: 40px;
+}
+.phone .layer-6 input[type=checkbox] {
+  animation-name: bunny;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 .phone .layer-7 {
   position: absolute;
@@ -260,6 +297,18 @@ div input[type=checkbox] {
   width: 80px;
   z-index: 2;
 }
+div input[type=checkbox]:focus {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+}
+div input:checked {
+  counter-increment: score;
+}
+div input::after {
+  content: counter(score);
+}
 div .left-ear--outer {
   position: absolute;
   border-radius: 90%;
@@ -323,4 +372,17 @@ div .head .head__eye--left {
 }
 div .head .head__eye--right {
   right: 30px;
+}
+div .score::after {
+  content: counter(score);
+}
+div .title {
+  text-align: center;
+  font-weight: 500;
+  color: #a6543d;
+}
+div .score {
+  color: #a6543d;
+  font-size: 16px;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */
