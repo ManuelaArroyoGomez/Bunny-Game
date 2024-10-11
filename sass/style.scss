@@ -24,9 +24,9 @@ $shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
     box-shadow: $shadow;
     overflow: hidden;
 }
-@mixin animationBunny {
-    animation-name: layer;
-    animation-duration: 1s;
+@mixin animationBunny($name, $time) {
+    animation-name: $name;
+    animation-duration: $time;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -54,12 +54,24 @@ $shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
         bottom: 0;
     }
 }
+@keyframes bunny {
+    0% {
+        top: 0;
+    }
+    25% {
+        top: 80px;
+    }
+    100% {
+        top: 0;
+    }
+}
 body {
     margin: 0;
     height: 100vh;
     width: 100%;
     display: grid;
     place-items: center;
+    counter-reset: score;
 }
 .phone {
     position: relative;
@@ -69,17 +81,24 @@ body {
     height: 600px;
     background: #ccefff;
     box-shadow: $shadow;
+    overflow: hidden;
     .layer-1 {
         @include layerconf(1, 450px, 80px);
-        @include animationBunny;
+        @include animationBunny(layer, 1s);
         bottom: 0;
         right: 60px;
+        input[type=checkbox] {
+            @include animationBunny(bunny, 1s)
+        }
     }
     .layer-2 {
         @include layerconf(2, 450px, 80px);
-        @include animationBunny;
+        @include animationBunny(layer, 1.5);
         bottom: 0;
         left: 60px;
+        input[type=checkbox] {
+            @include animationBunny(bunny, 1.5s)
+        }
     }
     .layer-3 {
         @include layerconf(3, 400px, 220px);
@@ -93,8 +112,11 @@ body {
     }
     .layer-4 {
         @include layerconf(4, 350px, 80px);
-        @include animationBunny;
+        @include animationBunny(layer, 0.5s);
         left: 20px;
+        input[type=checkbox] {
+            @include animationBunny(bunny, 0.5s)
+        }
     }
     .layer-5 {
         @include layerconf(5, 300px, 220px);
@@ -104,16 +126,18 @@ body {
     }
     .layer-6 {
         @include layerconf(6, 250px, 80px);
-        @include animationBunny;
+        @include animationBunny(layer, 2s);
         right: 40px;
+        input[type=checkbox] {
+            @include animationBunny(bunny, 2s)
+        }
     }
     .layer-7 {
         @include layerconf(7, 200px, 160px);
         @include shadow();
         background: $wall;
         border-radius: 20px;
-        right: 0;
-        
+        right: 0; 
     }
     .layer-3::after,
     .layer-5::after,
@@ -220,6 +244,16 @@ div {
         width: 80px;
         z-index: 2;
     }
+    input[type=checkbox]:focus {
+        appearance: none;
+        outline: none;
+    }
+    input:checked {
+        counter-increment: score;
+    }
+    input::after {
+        content: counter(score);
+    }
     .left-ear--outer {
         @include bunnyconf(90%, 20px, 50px);
         background: $bunny;
@@ -266,4 +300,17 @@ div {
             right: 30px;
         }
     }
+    .score::after {
+        content: counter(score);
+    }
+    .title {
+        text-align: center;
+      }  
+      .score {
+        color: $land;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        text-align: center;
+      }
 }
