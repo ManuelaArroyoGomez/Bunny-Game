@@ -63,7 +63,6 @@ body {
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  bottom: 0;
   right: 60px;
 }
 .phone .layer-1 input[type=checkbox] {
@@ -79,7 +78,7 @@ body {
   width: 80px;
   bottom: 0;
   animation-name: layer;
-  animation-duration: 1.5;
+  animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   left: 60px;
@@ -378,7 +377,7 @@ div .score::after {
 }
 div .title {
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
   color: #a6543d;
 }
 div .score {
